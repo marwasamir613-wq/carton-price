@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>حاسب سعر الكرتونة</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8f8f8; padding: 20px; }
+    h1 { text-align: center; color: #007bff; margin-bottom: 5px; }
+    h2 { text-align: center; color: #333; margin-bottom: 20px; }
+    .container { max-width: 400px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    button { margin-top: 15px; width: 100%; padding: 10px; background: #28a745; color: #fff; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #218838; }
+    .result { margin-top: 15px; font-size: 18px; text-align: center; color: #333; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>أ طارق</h1>
+    <h2>حاسب سعر الكرتونة</h2>
+
+    <label>الطول (سم):</label>
+    <input type="number" id="length" placeholder="ادخل الطول">
+    
+    <label>العرض (سم):</label>
+    <input type="number" id="width" placeholder="ادخل العرض">
+    
+    <label>الارتفاع (سم):</label>
+    <input type="number" id="height" placeholder="ادخل الارتفاع">
+    
+    <label>نوع الكرتون:</label>
+    <select id="type">
+      <option value="1">عادي</option>
+      <option value="1.5">مضاعف</option>
+      <option value="2">خاص</option>
+    </select>
+
+    <label>الكمية:</label>
+    <input type="number" id="quantity" placeholder="ادخل الكمية" value="1">
+
+    <button onclick="calculatePrice()">احسب السعر</button>
+    
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculatePrice() {
+      const length = parseFloat(document.getElementById('length').value);
+      const width = parseFloat(document.getElementById('width').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const typeMultiplier = parseFloat(document.getElementById('type').value);
+      const quantity = parseFloat(document.getElementById('quantity').value);
+
+      if(isNaN(length) || isNaN(width) || isNaN(height) || isNaN(quantity)) {
+        document.getElementById('result').innerText = "من فضلك املأ كل الحقول بشكل صحيح!";
+        return;
+      }
+
+      const unitPrice = length * width * height * typeMultiplier * 0.1; // معامل سعر الوحدة
+      const totalPrice = unitPrice * quantity;
+
+      document.getElementById('result').innerText = "السعر النهائي: " + totalPrice.toFixed(2) + " جنيه";
+    }
+  </script>
+</body>
+</html>
